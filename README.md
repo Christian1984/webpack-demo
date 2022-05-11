@@ -1,0 +1,1 @@
+This is a demo project to learn about manually setting up a webpack project from scratch. It follow the tutorial found at https://ideas.byteridge.com/webpack-bundle-your-frontend-apps/
