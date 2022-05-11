@@ -13,3 +13,7 @@ Run webpack without any configuration by simply running `npx webpack`.
 Create a custom config file webpack.config.js, then run `npx webpack --config=webpack.config.js`.
 
 Add a build script to `package.json` (see file)
+
+# Notes
+
+When having multiple html files with multiple entry points, refer to this: https://stackoverflow.com/a/63385300/1934396
