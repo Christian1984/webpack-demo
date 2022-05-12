@@ -1,3 +1,5 @@
+import "./index.css";
+
 console.log("Hello Webpack Demo");
 
 const p = document.createElement('p');
