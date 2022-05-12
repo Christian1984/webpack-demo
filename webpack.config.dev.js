@@ -7,5 +7,17 @@ module.exports = merge(commonConfig, {
     devtool: "inline-source-map",
     devServer: {
       static: path.resolve(__dirname, "dist"),
+    },
+    module: {
+        rules: [
+            {
+                test: /\.css$/,
+                use: ["style-loader", "css-loader"]
+            },
+            {
+                test: /\.s[ac]ss$/,
+                use: ["style-loader", "css-loader", "sass-loader"]
+            }
+        ]
     }
 });

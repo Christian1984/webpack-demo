@@ -55,6 +55,48 @@ module: {
 }
 ```
 
+## Separate CSS Files
+
+Install `mini-css-extract-plugin`. Then configure it as follows to create separate css files and avoid css to be injected by js in production. Remove the css loaders from the common production file and spread it out to the prod and dev configurations:
+
+```
+const merge = require('webpack-merge');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const commonConfig = require('./webpack.config.common')
+
+module.exports = merge(commonConfig, {
+  mode: 'production',
+  devtool: 'source-map',
+  module: {
+    rules: [
+      {
+        test: /\.css$/,
+        use: [
+          MiniCssExtractPlugin.loader,
+          'css-loader',
+        ],
+      },
+      {
+        test: /\.s[ac]ss$/i,
+        use: [
+          // Load css to separate file
+          MiniCssExtractPlugin.loader,
+          // Translates CSS into CommonJS
+          'css-loader',
+          // Compiles Sass to CSS
+          'sass-loader',
+        ],
+      },
+    ],
+  },
+  plugins: [
+    new MiniCssExtractPlugin({
+      filename: '[name].[contenthash].css',
+    }),
+  ]
+})
+```
+
 # Babel
 
 For compatibility with older browsers, add babel by installing modules `babel-loader`, `@babel/core` and `@babel/preset-env`
