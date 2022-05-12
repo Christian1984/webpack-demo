@@ -122,13 +122,11 @@ Finally, add a `.babelrc` file to the project root with content:
 }
 ```
 
+## Minifying
+
+Add `terser-webpack-plugin` to minify js with custom options.
 
 # Notes
 
 - When having multiple html files with multiple entry points, refer to this: https://stackoverflow.com/a/63385300/1934396
 - Webpack has a watch mode: https://webpack.js.org/configuration/watch/
-
-# Try
-
-- build without production source map
-- obfuscate js
