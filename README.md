@@ -4,21 +4,25 @@ This is a demo project to learn about manually setting up a webpack project from
 
 Init a new npm package, then run `npm i webpack webpack-cli --save-dev`.
 
-# Zero Config
+# Basic Configuration
+
+## Zero Config
 
 Run webpack without any configuration by simply running `npx webpack`.
 
-# Own Base Config
+## Own Base Config
 
 Create a custom config file webpack.config.js, then run `npx webpack --config=webpack.config.js`.
 
 Add a build script to `package.json` (see file)
 
-# Stay DRY
+## Stay DRY
 
 To create config files for different configurations that share common code, the package `webpack-merge` can be used.
 
-# CSS
+# Styling
+
+## CSS
 
 CSS can be injected, too. First, install modules `style-loader` and `css-loader`, then add the configuration
 
@@ -35,13 +39,14 @@ module: {
 
 Finally, import css by adding `import "./index.css` to `index.js`.
 
-# SASS
+## SASS
 
 For SASS support module `sass-loader` and `node-sass` must be added. Configure it by adding this rule:
 
 ```
 module: {
     rules: [
+        /* existing rules */
         {
             test: /\.s[ac]ss$/,
             use: ["style-loader", "css-loader", "sass-loader"]
@@ -49,6 +54,32 @@ module: {
     ],
 }
 ```
+
+# Babel
+
+For compatibility with older browsers, add babel by installing modules `babel-loader`, `@babel/core` and `@babel/preset-env`
+
+```
+module: {
+    rules: [
+        /* existing rules */
+        {
+            test: /\.(js|jsx)$/,
+            exclude: /[\\/]node_modules[\\/]/,
+            use: ["babel-loader"]
+        }
+    ],
+}
+```
+
+Finally, add a `.babelrc` file to the project root with content:
+
+```
+{
+  "presets": ["@babel/preset-env"]
+}
+```
+
 
 # Notes
 
