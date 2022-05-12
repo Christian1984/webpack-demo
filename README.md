@@ -35,6 +35,21 @@ module: {
 
 Finally, import css by adding `import "./index.css` to `index.js`.
 
+# SASS
+
+For SASS support module `sass-loader` and `node-sass` must be added. Configure it by adding this rule:
+
+```
+module: {
+    rules: [
+        {
+            test: /\.s[ac]ss$/,
+            use: ["style-loader", "css-loader", "sass-loader"]
+        }
+    ],
+}
+```
+
 # Notes
 
 - When having multiple html files with multiple entry points, refer to this: https://stackoverflow.com/a/63385300/1934396
