@@ -1,12 +1,13 @@
 const path = require("path");
 const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
 module.exports = {
     mode: "development",
     entry: {
-        index1: "./src/index-1.js",
-        index2: "./src/index-2.js",
+        index: "./src/index.js",
+        index2: "./src/index2.js",
     },
     output: {
         filename: "[name].js",
@@ -14,17 +15,35 @@ module.exports = {
     },
     plugins: [
         new CleanWebpackPlugin(),
+        new MiniCssExtractPlugin({
+            filename: '[name].css'
+        }),
         new HtmlWebpackPlugin({
-            filename: "index1.html",
+            filename: "index.html",
             inject: "body",
-            template: path.resolve(__dirname, "src", "index-1.html"),
-            chunks: ["index1"]
+            template: path.resolve(__dirname, "src", "index.html"),
+            chunks: ["index"]
         }),
         new HtmlWebpackPlugin({
             filename: "index2.html",
             inject: "body",
-            template: path.resolve(__dirname, "src", "index-2.html"),
+            template: path.resolve(__dirname, "src", "index2.html"),
             chunks: ["index2"]
         })
-    ]
+    ],
+    module: {
+        rules: [
+            {
+                test: /\.css$/,
+                use: [MiniCssExtractPlugin.loader, "css-loader"]
+            },
+            {
+                test: /\.(woff|woff2|eot|ttf|otf)$/i,
+                type: 'asset/resource',
+                generator: {
+                    filename: "[hash]/[name][ext][query]",
+                },
+            }
+        ]
+    }
 }
